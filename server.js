@@ -50,7 +50,7 @@ function createTemplate(data){
             </div>
         </body>
     </html>`;
-    return htmlTemplate;
+    return htmltemplate;
 }
 
 app.get('/ui/style.css', function (req, res) {

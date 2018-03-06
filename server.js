@@ -1,3 +1,4 @@
+
 var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
@@ -89,3 +90,15 @@ var port = 80;
 app.listen(port, function () {
   console.log(`IMAD course app listening on port ${port}!`);
 });
+© 2018 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+API
+Training
+Shop
+Blog
+About

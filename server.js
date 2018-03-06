@@ -66,7 +66,6 @@ function createTemplate(data){
     </html>`;
     return htmltemplate;
 }
-var pool = new Pool(config);
 
 
 app.get('/ui/style.css', function (req, res) {
@@ -90,15 +89,3 @@ var port = 80;
 app.listen(port, function () {
   console.log(`IMAD course app listening on port ${port}!`);
 });
-© 2018 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-API
-Training
-Shop
-Blog
-About

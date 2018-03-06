@@ -18,26 +18,6 @@ app.use(morgan('combined'));
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
-var articles={
- 'article-one' :{
-  title :'Article One | Sonu Jha',
-  heading : "Article One",
-  date : "18 feb 2018",
-  content : "This is first content of my article one."
-},
- 'article-two':{
-    title :'Article two | Sonu Jha',
-  heading : "Article Two",
-  date : "18 feb 2018",
-  content : "This is Second content of my article one."
-},
- 'article-three':{
-    title :'Article three | Sonu Jha',
-  heading : "Article Three",
-  date : "18 feb 2018",
-  content : "This is Third content of my article one."
-}
-};
 
 function createTemplate(data){
     var title = data.title;
@@ -94,7 +74,7 @@ app.get('/ui/style.css', function (req, res) {
 });
 
 app.get('/articles/:article', function (req, res) {
-    pool.query("SELECT * FROM article WHERE title = '"+req.params.article+"'",function(err,result){
+    pool.query("SELECT * FROM article WHERE title = $1 ",[req.params.article],function(err,result){
       if(err){
           res.status(500).send(err.toString());
       }  else if(result.rows.length===0){

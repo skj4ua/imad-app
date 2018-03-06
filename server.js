@@ -93,10 +93,21 @@ app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
 });
 
-app.get('/:article', function (req, res) {
-    var article=req.params.article;
-  res.send(createTemplate(articles[article]));
-});
+app.get('/articles/:article', function (req, res) {
+    pool.query("SELECT * FROM article WHERE title = '"+req.params.article+"'",function(err,result){
+      if(err){
+          res.status(500).send(err.toString());
+      }  else{
+          if(result.rows.length===0){
+              res.status(404).send('Article was found');
+          }
+          else{
+              var articledata =result.rows[0];
+              res.send(createTemplate(articledata));
+          }
+      }
+    });
+ });
 
 app.get('/ui/madi.png', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'madi.png'));

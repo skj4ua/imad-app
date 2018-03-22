@@ -20,8 +20,8 @@ submit.onclick=function(){
         }
     };
     
-   var username = document.getElementById('username');
-   var password = document.getElementById('password');
+   var username = document.getElementById('username');console.log(username);
+   var password = document.getElementById('password');console.log(passowrd);
    request.open('POST','http://sonukrj08.imad.hasura-app.io/login',true);
    request.setRequestHeader('content-type','application/json');
    request.send(JSON.stringify({username:username,password:password}));

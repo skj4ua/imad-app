@@ -56,6 +56,7 @@ function createTemplate(data){
     </html>`;
     return htmltemplate;
 }
+
 function hash(input,salt){
     var hashed = crypto.pbkdf2Sync(input,salt,10000,512,'sha512');
     return hashed.toString('hex');
@@ -65,6 +66,16 @@ app.post('/create-user',function(req,res){
    
     
 });
+
+app.ppost('/login',function(req,res){
+var username = req.body.username;
+var password = req.body.password;
+
+pool.query('Select * from "user" username = $1',[username],function(req,res){
+    
+});
+});
+
 app.get('/hash/:input',function(req,res){
     var hashedstring = hash(req.params.input,"This is some random string");
     res.send(hashedstring);
@@ -73,13 +84,21 @@ app.get('/hash/:input',function(req,res){
 var pool = new Pool(config);
 app.get('/test-db',function(req,res){
     pool.query('SELECT * FROM test',function(err,result){
-        if(err){
-            res.status(500).send(err.toString());
-            
-        }
-        else{
-            res.send(JSON.stringify(result));
-        }
+         if(err){
+          res.status(500).send(err.toString());
+          }  
+      else if(result.rows.length===0){
+              res.send(403).send('Username/password is incorrect');
+          }
+          else{
+              var dbstring =result.rows[0].password;
+              var salt = dbstring.split('$')[2];
+              var hashpass = hash(password,salt);
+              if(hashpass == dbstring)
+              res.send('credential correct');
+          else
+              res.send(403).send('username/password is incorrect');
+          }
     });
 });
 

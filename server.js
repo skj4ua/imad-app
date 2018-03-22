@@ -61,7 +61,10 @@ function hash(input,salt){
     return hashed.toString('hex');
     
 }
-
+app.post('/create-user',function(req,res){
+   
+    
+});
 app.get('/hash/:input',function(req,res){
     var hashedstring = hash(req.params.input,"This is some random string");
     res.send(hashedstring);

@@ -4,6 +4,7 @@ var morgan = require('morgan');
 var path = require('path');
 var Pool = require('pg').Pool;
 var crypto = require('crypto');
+
 var config = {
     user: 'sonukrj08',
     database: 'sonukrj08',
@@ -61,11 +62,12 @@ function hash(input,salt){
     
 }
 
-var pool = new Pool(config);
-app.get('hash/:input',function(req,res){
+app.get('/hash/:input',function(req,res){
     var hashedstring = hash(req.params.input,"This is some random string");
     res.send(hashedstring);
 });
+
+var pool = new Pool(config);
 app.get('/test-db',function(req,res){
     pool.query('SELECT * FROM test',function(err,result){
         if(err){

@@ -82,11 +82,13 @@ app.post('/login',function(req,res){
 var username = req.body.username;
 var password = req.body.password;
 
-pool.query('Select * from "user" WHERE username = $1',[username],function(req,res){
-   if(err){
-          res.status(500).send(err.toString());
-          }  
-      else if(result.rows.length===0){
+pool.query('Select * from "user" WHERE username = $1',[username],function(err,result){
+   if(err)
+    res.status(500).send(err.toString());
+            
+      else
+      {
+          if(result.rows.length===0){
               res.send(403).send('Username/password is incorrect');
           }
           else{
@@ -95,9 +97,10 @@ pool.query('Select * from "user" WHERE username = $1',[username],function(req,re
               var hashpass = hash(password,salt);
               if(hashpass == dbstring)
               res.send('credential correct');
-          else
+              else
               res.send(403).send('username/password is incorrect');
           }
+      }
 });
 });
 

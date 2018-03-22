@@ -1,7 +1,7 @@
 console.log('Loaded!');
 var reg = document.getElementById('reg_btn');
 var submit = document.getElementById('submit_btn');
-submit.on('click',function(req,res){
+submit.onclick=function(){
     var request = new XMLHttpRequest();
     
     request.onreadystateexchange = function(){
@@ -22,16 +22,17 @@ submit.on('click',function(req,res){
    request.open('POST','http://sonukrj08.imad.hasura-app.io/login',true);
    request.setRequestHeader('content-type','application/json');
    request.send(JSON.stringify({username:username,password:password}));
-});
+};
 
-reg.on('click',function(req,res){
+reg.onclick=function(){
     var request = new XMLHttpRequest();
     
     request.onreadystateexchange = function(){
         if(request.readystate === XMLHttpRequest.DONE){
             if(request.status == 200)
             alert("registration Successfully");
-            
+            else if(request.status == 403)
+            alert("username/password is incorrect");
             else
             alert("something went wrong on the server");
         }
@@ -42,4 +43,4 @@ reg.on('click',function(req,res){
    request.open('POST','http://sonukrj08.imad.hasura-app.io/create-user',true);
    request.setRequestHeader('content-type','application/json');
    request.send(JSON.stringify({username:username,password:password}));
-});
+};

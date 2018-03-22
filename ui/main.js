@@ -43,8 +43,8 @@ reg.onclick=function(){
         }
     };
     
-   var username = document.getElementById('username');
-   var password = document.getElementById('password');
+   var username = document.getElementById('username').value;
+   var password = document.getElementById('password').value;
    request.open('POST','http://sonukrj08.imad.hasura-app.io/create-user',true);
    request.setRequestHeader('content-type','application/json');
    request.send(JSON.stringify({username:username,password:password}));

@@ -72,7 +72,7 @@ app.post('/create-user',function(req,res){
    var dbstring = hash(password,salt);console.log(dbstring);
    pool.query('INSERT INTO "user" (username,password) VALUES($1,$2)',[username,dbstring],function(err,result){
        if(err)
-       res.status(500).send(err.toString());
+       res.status(200).send(err.toString());
        else
        res.send("user successfully created: "+username);
    });

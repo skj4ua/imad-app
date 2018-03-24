@@ -23,7 +23,6 @@ submit.onclick = function () {
                   alert('Something went wrong on the server');
                   submit.value = 'Login';
               }
-              loadLogin();
           }  
           // Not done yet
         };
@@ -36,7 +35,7 @@ submit.onclick = function () {
         request.open('POST', '/login', true);
         request.setRequestHeader('Content-Type', 'application/json');
         request.send(JSON.stringify({username: username, password: password}));  
-        submit.value = 'Logging in...';
+        submit.value = 'Logged in';
         
     };
 

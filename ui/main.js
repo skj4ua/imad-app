@@ -1,5 +1,5 @@
 console.log('Loaded!');
-var reg = document.getElementById('reg_btn');
+
 
 var submit = document.getElementById('submit_btn');
 
@@ -29,6 +29,8 @@ submit.onclick=function(){
    request.send(JSON.stringify({username: username,password: password}));
 };
 
+
+var reg = document.getElementById('reg_btn');
 reg.onclick=function(){
     var request = new XMLHttpRequest();
     
@@ -46,7 +48,7 @@ reg.onclick=function(){
    var username = document.getElementById('username').value;
    var password = document.getElementById('password').value;
    console.log(username);console.log(password);
-   request.open('POST','/create-user',true);
-   request.setRequestHeader('Content-Type','application/json');
-   request.send(JSON.stringify({username: username,password: password}));
+   request.open('POST', '/create-user', true);
+        request.setRequestHeader('Content-Type', 'application/json');
+        request.send(JSON.stringify({username: username, password: password}));  
 };

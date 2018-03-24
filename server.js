@@ -97,7 +97,7 @@ pool.query('Select * from "user" WHERE username = $1',[username],function(err,re
               var salt = dbstring.split('$')[2];
               var hashpass = hash(password,salt);
               if(hashpass == dbstring)
-              res.send('credential correct');
+              alert('User logged in');
               else
               res.send(403).send('username/password is incorrect');
           }
